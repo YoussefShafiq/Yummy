@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Yummy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo.png" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+</head>
+
+<body>
+    <div class="sidenav d-flex flex-column justify-content-between">
+        <div class="navitems p-3 d-flex flex-column">
+            <div class="navitemcont">
+                <a id="searchNav" class="navitem" myatr="searchPage" href="#search">Search</a>
+            </div>
+            <div class="navitemcont">
+                <a id="CategoriesNav" class="navitem" myatr="categoryPage" href="#Categories">Categories</a>
+            </div>
+            <div class="navitemcont">
+                <a id="areaNav" class="navitem" myatr="areaPage" href="#Area">Area</a>
+            </div>
+            <div class="navitemcont">
+                <a id="IngredientsNav" class="navitem" myatr="ingredientsPage" href="#Ingredients">Ingredients</a>
+            </div>
+            <div class="navitemcont">
+                <a id="ContactUsNav" class="navitem" myatr="contactusPage" href="#ContactUs">ContactUs</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="d-flex text-center px-3 gap-2">
+                <i class="fa-solid fa-globe"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-facebook"></i>
+            </div>
+            <div class="copyright p-3 position-relative">
+                <p>Copyright Shafiq© 2024 All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+    <div id="navshow" class="d-flex flex-column justify-content-between align-items-center">
+        <div class="logo">
+            <img src="images/logo.png" class="w-100" alt="">
+        </div>
+        <div class="show text-black fs-2">
+            <i id="itemicon" class="fa-solid fa-bars"></i>
+        </div>
+        <div class="text-black d-flex flex-column justify-content-between gap-2">
+            <i class="fa-solid fa-globe"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+        </div>
+    </div>
+
+    <div id="mybody" class="pt-5">
+        <!--  meal details page -->
+        <div id="mealDetailsContainer">
+            <div class="close">
+                <i id="closiIcon" class="fa-solid fa-xmark position-absolute top-0 end-0 fs-1 m-3"></i>
+            </div>
+            <div id="mealDetails" class="row text-light">
+                <div class="d-grid spincont">
+                    <span class="loader m-auto"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- default page -->
+        <div id="defaultPage" class="container">
+            <div id="randomMeals" class="row">
+                <div class="d-grid spincont">
+                    <span class="loader m-auto"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- search page -->
+        <div id="searchPage" class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="searchByName" class="bg-transparent form-control text-light" type="text"
+                        placeholder="search by name...">
+                </div>
+                <div class="col-md-6">
+                    <input id="searchByLetter" class="bg-transparent form-control text-light" type="text"
+                        placeholder="search by firstletter..." maxlength="1">
+                </div>
+
+                <div class="searchedMealsContainer">
+                    <div id="searchedMeals" class="row">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- areaSelection page -->
+        <div id="areaPage" class="container">
+            <div id="allAreas" class="row">
+
+            </div>
+        </div>
+
+        <!-- categoryselection page -->
+        <div id="categoryPage" class="container">
+            <div id="allCategories" class="row">
+
+            </div>
+        </div>
+
+        <!-- category Meals Page -->
+        <div id="categoryMealsPage" class="container">
+            <div id="categoryMeals" class="row">
+                <div class="d-grid spincont">
+                    <span class="loader m-auto"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- area Meals Page -->
+        <div id="areaMealsPage" class="container">
+            <div id="areaMeals" class="row">
+                <div class="d-grid spincont">
+                    <span class="loader m-auto"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ingredientSelection page -->
+        <div id="ingredientsPage" class="container">
+            <div id="allIngredients" class="row">
+
+            </div>
+        </div>
+
+        <!-- ingredient Meals Page -->
+        <div id="ingredientMealsPage" class="container">
+            <div id="ingredientMeals" class="row">
+                <div class="d-grid spincont">
+                    <span class="loader m-auto"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- contact us page -->
+        <div id="contactusPage" class="container">
+            <div id="contactusform">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" id="nameInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Enter your name">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" id="emailInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Enter your email">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="phoneInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Enter your phone">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="number" id="ageInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Enter your age">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="password" id="passwordInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Enter your password">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="password" id="repasswordInput"
+                            class="contactUsInputs form-control my-3 bg-transparent text-light"
+                            placeholder="Repassword">
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button id="contactUsSubmitBtn" class="btn btn-outline-warning disabled">submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js" type="module"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

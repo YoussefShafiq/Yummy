@@ -63,7 +63,7 @@ body {
 }
 
 .active:hover {
-    color: tomato;
+    color: rgb(255, 38, 0);
 }
 
 .copyright {

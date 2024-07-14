@@ -448,8 +448,14 @@ $('.contactUsInputs').on('input', function formCheck() {
 $('.navitem').on('click', function () {
     let target = $(this).attr('myatr')
     target = '#' + target
+    $('.navitem').removeClass('active')
+    $(this).addClass('active')
+    window.scrollTo({
+        top: 0
+    });
     $('.container').fadeOut(100)
     $(target).fadeIn(400)
+
 
     $('.copyright').animate({ left: '-150px' }, 200)
     $('.navitem').animate({ top: 22 }, 200);

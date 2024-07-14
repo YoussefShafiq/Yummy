@@ -7,7 +7,7 @@ async function DisplayRandomMeals() {
     let meal = new Meal()
     let meals = await meal.fetchRandomMeals()
     document.getElementById('randomMeals').innerHTML = ``
-    for (let i = 0; i < meals.length; i++) {
+    for (let i = 0; i < Math.min(meals.length, 20); i++) {
         document.getElementById('randomMeals').innerHTML += `
         <div class="col-md-3 my-3">
         <div mealid=${meals[i].idMeal} class="meal position-relative rounded overflow-hidden">
@@ -34,9 +34,9 @@ $('#searchByName').on('input',
         let meal = new Meal()
         let meals = await meal.fetchMealByName(name)
 
-        console.log(meals);
+        // console.log(meals);
         document.getElementById('searchedMeals').innerHTML = ``
-        for (let i = 0; i < meals.length; i++) {
+        for (let i = 0; i < Math.min(meals.length, 20); i++) {
             document.getElementById('searchedMeals').innerHTML += `
             <div class="col-md-3 my-3">
             <div mealid=${meals[i].idMeal} class="meal position-relative rounded overflow-hidden">
@@ -61,8 +61,7 @@ $('#searchByLetter').on('input',
         let letter = $(this).val()
         let meal = new Meal()
         let meals = await meal.fetchMealByLetter(letter)
-
-        console.log(meals);
+        // console.log(meals);
         document.getElementById('searchedMeals').innerHTML = ``
         for (let i = 0; i < meals.length; i++) {
             document.getElementById('searchedMeals').innerHTML += `
@@ -89,14 +88,14 @@ $('#searchByLetter').on('input',
 DisplayAllAreas()
 async function DisplayAllAreas() {
     let meal = new Meal()
-    let meals = await meal.fetchAllAreas()
+    let areas = await meal.fetchAllAreas()
     document.getElementById('allAreas').innerHTML = ``
-    for (let i = 0; i < meals.length; i++) {
+    for (let i = 0; i < areas.length; i++) {
         document.getElementById('allAreas').innerHTML += `
-                <div area="${meals[i].strArea}" class="area col-md-3 my-3">
+                <div area="${areas[i].strArea}" class="area col-md-3 my-3">
                     <div class="d-flex flex-column justify-content-center align-items-center text-light">
                         <i class="fa-solid fa-house-flag fs-1"></i>
-                        <h2>${meals[i].strArea}</h2>
+                        <h2>${areas[i].strArea}</h2>
                     </div>
                 </div>
         `
@@ -113,9 +112,9 @@ async function displayAreaMeals(area) {
     $('#areaMealsPage').fadeIn(150)
     let meal = new Meal()
     let meals = await meal.fetchArea(area)
-    console.log(meals);
+    // console.log(meals);
     document.getElementById('areaMeals').innerHTML = ``
-    for (let i = 0; i < meals.length; i++) {
+    for (let i = 0; i < Math.min(meals.length, 20); i++) {
         document.getElementById('areaMeals').innerHTML += `
             <div class="col-md-3 my-3">
             <div mealid=${meals[i].idMeal} class="meal position-relative rounded overflow-hidden">
@@ -160,7 +159,7 @@ async function DisplayAllIngredients() {
 
             }, 100);
             if (ingredient) {
-                console.log(ingredient);
+                // console.log(ingredient);
                 displayIngredientMeals(ingredient)
             }
         })
@@ -169,7 +168,7 @@ async function DisplayAllIngredients() {
 
 // display ingredient meals
 async function displayIngredientMeals(ingredient) {
-    console.log('ingredient is:' + ingredient);
+    // console.log('ingredient is:' + ingredient);
     document.getElementById('ingredientMeals').innerHTML = `
     <div class="d-grid spincont">
                     <span class="loader m-auto"></span>
@@ -189,7 +188,7 @@ async function displayIngredientMeals(ingredient) {
     } else {
         document.getElementById('ingredientMeals').innerHTML = ``
 
-        for (let i = 0; i < meals.length; i++) {
+        for (let i = 0; i < Math.min(meals.length, 20); i++) {
             document.getElementById('ingredientMeals').innerHTML += `
             <div class="col-md-3 my-3">
             <div mealid=${meals[i].idMeal} class="meal position-relative rounded overflow-hidden">
@@ -239,7 +238,7 @@ async function DisplayAllCategories() {
             setTimeout(() => {
             }, 100);
             if (category) {
-                console.log(category);
+                // console.log(category);
                 displayCategoryMeals(category)
             }
         })
@@ -267,7 +266,7 @@ async function displayCategoryMeals(category) {
     } else {
         document.getElementById('categoryMeals').innerHTML = ``
 
-        for (let i = 0; i < meals.length; i++) {
+        for (let i = 0; i < Math.min(meals.length, 20); i++) {
             document.getElementById('categoryMeals').innerHTML += `
             <div class="col-md-3 my-3">
             <div mealid=${meals[i].idMeal} class="meal position-relative rounded overflow-hidden">
@@ -353,7 +352,12 @@ async function DisplayMealDetails(id) {
     if (mealDetails.strIngredient20 != '' && mealDetails.strIngredient20 != null)
         recipesUI += `<div class="recipe">${mealDetails.strIngredient20}</div>`
 
-
+    let strsrcUI = ``;
+    if (mealDetails.strSource == null) {
+        strsrcUI = ``
+    } else {
+        strsrcUI = `<a href="${mealDetails.strSource}" target="_blank" class="btn btn-success">Source</a>`
+    }
 
     let details = `
                 <div class="col-md-3">
@@ -381,13 +385,15 @@ async function DisplayMealDetails(id) {
                             ${tagsUI}
                         </div>
                         <div class="d-flex my-4 gap-3">
-                            <a href="${mealDetails.strSource}" class="btn btn-success">Source</a>
+                            ${strsrcUI}
                             <a href="${mealDetails.strYoutube}" class="btn btn-danger">Youtube</a>
                         </div>
                     </div>
                 </div>
     `
     document.getElementById('mealDetails').innerHTML = details
+
+
 
 }
 
@@ -434,7 +440,7 @@ $('.contactUsInputs').on('input', function formCheck() {
 
     if (emailregex.test($('#emailInput').val()) && phregex.test($('#phoneInput').val()) && $('#ageInput').val() > 0 && $('#passwordInput').val() == $('#repasswordInput').val() && $('#nameInput').val().length > 3 && $('#passwordInput').val().length > 0) {
         $('#contactUsSubmitBtn').removeClass('disabled')
-        console.log('disabled');
+        // console.log('disabled');
     } else {
         $('#contactUsSubmitBtn').addClass('disabled')
     }
@@ -446,17 +452,34 @@ $('.contactUsInputs').on('input', function formCheck() {
 
 // ! navigation
 $('.navitem').on('click', function () {
+    // close details if open
+    $('#mealDetailsContainer').fadeOut(500)
+    setTimeout(() => {
+        document.getElementById('mealDetails').innerHTML = `
+        <div class="d-grid spincont">
+                        <span class="loader m-auto"></span>
+                    </div>
+        `
+    }, 500);
+
+    // get the target
     let target = $(this).attr('myatr')
     target = '#' + target
+
+    // let link active
     $('.navitem').removeClass('active')
     $(this).addClass('active')
+
+    // get to the top of target page
     window.scrollTo({
         top: 0
     });
+
+    // display the target
     $('.container').fadeOut(100)
     $(target).fadeIn(400)
 
-
+    // close the sidenav
     $('.copyright').animate({ left: '-150px' }, 200)
     $('.navitem').animate({ top: 22 }, 200);
     $('#itemicon').removeClass('fa-xmark')
